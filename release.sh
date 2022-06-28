@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # Bash version should >= 4 to be able to run this script.
 
-IMAGE="${DOCKER_ORG:-budtmo}/docker-android"
+IMAGE="${DOCKER_ORG:-grichner}/docker-android"
 
 if [ -z "$1" ]; then
     read -p "Task (test|build|push|all) : " TASK
@@ -43,8 +43,8 @@ declare -A chromedriver_versions=(
         [8.1]="2.33"
         [9.0]="2.40"
         [10.0]="74.0.3729.6"
-        [11.0]="83.0.4103.39"
-        [12.0]="93.0.4577.15"
+        [11.0]="102.0.5005.61"
+        [12.0]="102.0.5005.61"
 )
 
 function get_android_versions() {
