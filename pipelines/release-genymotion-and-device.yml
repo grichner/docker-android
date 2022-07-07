@@ -17,8 +17,8 @@ jobs:
   steps:
   - task: UsePythonVersion@0
     inputs:
-      versionSpec: '3.5'
-      displayName: 'Use Python 3.5'
+      versionSpec: '3.8.12'
+      displayName: 'Use Python 3.8.12'
 
   - script: |
       latest_tag=$(git describe --tags --abbrev=0)
@@ -28,7 +28,7 @@ jobs:
 
   - script: |
       docker login -u $(DOCKER_USERNAME) -p=$(DOCKER_PASSWORD)
-      TOKEN=$(p_token) $(script.name) all $(release_version)
+      $(script.name) all $(release_version)
       docker logout
 
     displayName: 'Build docker image, run unit tests and push the docker image'
