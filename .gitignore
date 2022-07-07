@@ -9,3 +9,4 @@ xunit.xml
 coverage/*
 /.project
 /android_pixel4_12_api.txt
+/chrome/
