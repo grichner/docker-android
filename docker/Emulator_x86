@@ -51,6 +51,9 @@ WORKDIR /root
 # bridge-utils
 #==================
 ADD docker/configs/x11vnc.pref /etc/apt/preferences.d/
+ADD docker/configs/Emulator.conf /root/.config/Android_Open_Source_Project/
+RUN mv /root/.config/Android_Open_Source_Project /root/.config/Android\ Open\ Source\ Project
+
 RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
     xterm \
     supervisor \
