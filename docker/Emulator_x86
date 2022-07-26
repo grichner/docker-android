@@ -50,7 +50,7 @@ WORKDIR /root
 # ubuntu-vm-builder
 # bridge-utils
 #==================
-ADD docker/configs/x11vnc.pref /etc/apt/preferences.d/
+###ADD docker/configs/x11vnc.pref /etc/apt/preferences.d/
 ADD docker/configs/Emulator.conf /root/.config/Android_Open_Source_Project/
 RUN mv /root/.config/Android_Open_Source_Project /root/.config/Android\ Open\ Source\ Project
 
