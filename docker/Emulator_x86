@@ -1,4 +1,4 @@
-FROM appium/appium
+FROM grichner/appium-bionic
 ##v1.22.0-p0
 
 LABEL maintainer "Budi Utomo <budtmo.os@gmail.com>"
@@ -62,13 +62,13 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
     openbox \
     feh \
     menu \
-    python-numpy \
+    python3-numpy \
     net-tools \
     ffmpeg \
     jq \
     qemu-kvm \
-    libvirt-bin \
-    ubuntu-vm-builder \
+    libvirt-daemon-system \
+    libvirt-clients \
     bridge-utils \
  && apt clean all \
  && rm -rf /var/lib/apt/lists/*
