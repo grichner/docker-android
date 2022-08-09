@@ -73,8 +73,8 @@ RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
  && apt clean all \
  && rm -rf /var/lib/apt/lists/*
  
-RUN wget http://bdlin32.dhcp.db.de:8080/com.android.chrome_102.0.5005.125.apk
-RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_102.0.5005.125.apk
+RUN wget http://bdlin32.dhcp.db.de:8080/com.android.chrome_103.0.5060.129.apk
+RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_103.0.5060.129.apk
 
 #=======
 # noVNC
