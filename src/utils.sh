@@ -41,11 +41,11 @@ function install_google_play () {
   echo "Google Play Store will be installed"
   adb install -r "/root/google_play_store.apk"
   
-  until adb install -r /root/com.google.android.webview_103.0.5060.129.apk
+  until adb install -- abi x86_64 -r /root/com.google.android.webview_103.0.5060.129.apk
   do
   	sleep 1
   done
-  until adb install -r /root/com.android.chrome_103.0.5060.129.apk
+  until adb install -- abi x86_64 -r /root/com.android.chrome_103.0.5060.129.apk
   do
   	sleep 1
   done
