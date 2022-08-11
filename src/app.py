@@ -216,7 +216,7 @@ def run():
     logger.info('AVD name: {avd}'.format(avd=avd_name))
     is_first_run = not is_initialized(device)
 
-    dp_size = os.getenv('DATAPARTITION', '550m')
+    dp_size = os.getenv('DATAPARTITION', '6g')
 
     if is_first_run:
         logger.info('Preparing emulator...')
