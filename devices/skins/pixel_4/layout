@@ -9,10 +9,10 @@ parts {
   }
   portrait {
     background {
-      image back.png
+      image back.webp
     }
     foreground {
-      mask mask.png
+      mask mask.webp
       cutout emu01
     }
   }
