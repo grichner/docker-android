@@ -96,7 +96,7 @@ def prepare_avd(device: str, avd_name: str, dp_size: str):
 
     # For custom hardware profile
     profile_dst_path = os.path.join(ROOT, '.android', 'devices.xml')
-    if 'samsung' in device.lower():
+    if 'samsung' or 'google' in device.lower():
         # profile file name = skin name
         profile_src_path = os.path.join(ROOT, 'devices', 'profiles', '{profile}.xml'.format(profile=skin_name))
         logger.info('Hardware profile resource path: {rsc}'.format(rsc=profile_src_path))
