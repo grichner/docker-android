@@ -155,7 +155,7 @@ ENV DISPLAY=:0 \
     VIDEO_PATH=/tmp/video \
     LOG_PATH=/var/log/supervisor
     
-RUN ln -s /usr/bin/python3 /usr/bin/python
+## RUN ln -s /usr/bin/python3 /usr/bin/python
 
 #================================================
 # openbox configuration
