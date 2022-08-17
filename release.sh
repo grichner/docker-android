@@ -1,7 +1,7 @@
 #!/usr/local/bin/bash
 # Bash version should >= 4 to be able to run this script.
 
-IMAGE="${DOCKER_ORG:-grichner}/docker-android"
+IMAGE="${DOCKER_ORG:-grichner}/docker-android-ost"
 
 if [ -z "$1" ]; then
     read -p "Task (test|build|push|all) : " TASK
