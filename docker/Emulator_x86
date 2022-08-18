@@ -224,4 +224,5 @@ RUN chmod -R +x /root/src && chmod +x /root/supervisord.conf
 HEALTHCHECK --interval=30s --timeout=30s --retries=3 \
     CMD adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
 
+RUN mkdir -p /var/log/supervisor
 CMD /usr/bin/supervisord --configuration supervisord.conf
