@@ -100,17 +100,24 @@ RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_103.0.5060.12
 # Use same commit id that docker-selenium uses
 # https://github.com/elgalu/docker-selenium/blob/236b861177bd2917d864e52291114b1f5e4540d7/Dockerfile#L412-L413
 #=======
-ENV NOVNC_SHA="b403cb92fb8de82d04f305b4f14fa978003890d7" \
-    WEBSOCKIFY_SHA="558a6439f14b0d85a31145541745e25c255d576b"
-RUN  wget -nv -O noVNC.zip "https://github.com/kanaka/noVNC/archive/${NOVNC_SHA}.zip" \
- && unzip -x noVNC.zip \
- && rm noVNC.zip  \
- && mv noVNC-${NOVNC_SHA} noVNC \
- && wget -nv -O websockify.zip "https://github.com/kanaka/websockify/archive/${WEBSOCKIFY_SHA}.zip" \
- && unzip -x websockify.zip \
- && mv websockify-${WEBSOCKIFY_SHA} ./noVNC/utils/websockify \
- && rm websockify.zip \
- && ln noVNC/vnc_auto.html noVNC/index.html
+
+RUN zypper in python310-websockify \
+    novnc
+RUN ln -s /usr/share/novnc /root/noVNC && \
+    cp -af /root/noVNC/vnc_auto.html /root/noVNC/index.html
+
+    
+#ENV NOVNC_SHA="b403cb92fb8de82d04f305b4f14fa978003890d7" \
+#    WEBSOCKIFY_SHA="558a6439f14b0d85a31145541745e25c255d576b"
+#RUN  wget -nv -O noVNC.zip "https://github.com/kanaka/noVNC/archive/${NOVNC_SHA}.zip" \
+# && unzip -x noVNC.zip \
+# && rm noVNC.zip  \
+# && mv noVNC-${NOVNC_SHA} noVNC \
+# && wget -nv -O websockify.zip "https://github.com/kanaka/websockify/archive/${WEBSOCKIFY_SHA}.zip" \
+# && unzip -x websockify.zip \
+# && mv websockify-${WEBSOCKIFY_SHA} ./noVNC/utils/websockify \
+# && rm websockify.zip \
+# && ln noVNC/vnc_auto.html noVNC/index.html
 
 #======================
 # Install SDK packages
