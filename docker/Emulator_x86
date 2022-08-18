@@ -101,7 +101,7 @@ RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_103.0.5060.12
 # https://github.com/elgalu/docker-selenium/blob/236b861177bd2917d864e52291114b1f5e4540d7/Dockerfile#L412-L413
 #=======
 
-RUN zypper in python310-websockify \
+RUN zypper in -y python310-websockify \
     novnc
 RUN ln -s /usr/share/novnc /root/noVNC && \
     cp -af /root/noVNC/vnc_auto.html /root/noVNC/index.html
