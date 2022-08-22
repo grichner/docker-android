@@ -71,8 +71,7 @@ RUN zypper --no-gpg-checks ref  && \
     qemu-kvm \
     libvirt-daemon \
     libvirt-client \
-    bridge-utils && \
-    zypper clean --all
+    bridge-utils 
     
 # menu evtl. via aliens
 
