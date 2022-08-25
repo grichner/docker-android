@@ -63,6 +63,7 @@ RUN zypper --no-gpg-checks ref  && \
     socat \
     x11vnc \
     openbox \
+    dejavu-fonts \
     feh \
     python310-numpy \
     net-tools \
@@ -161,7 +162,7 @@ RUN yes | sdkmanager --licenses && \
 #==============================================
 RUN wget -nv -O chrome.zip "https://chromedriver.storage.googleapis.com/${CHROME_DRIVER}/chromedriver_linux64.zip" \
  && unzip -x chrome.zip \
- && rm chrome.zip
+ && rm -f chrome.zip
 
 #================================================================
 # Download Google Play Services APK and Play Store from apklinker
