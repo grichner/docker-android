@@ -108,7 +108,8 @@ RUN zypper in -y python310-websockify \
     novnc && \
     zypper clean --all
 RUN ln -s /usr/share/novnc /root/noVNC && \
-    cp -af /root/noVNC/vnc_auto.html /root/noVNC/index.html
+    cp -af /root/noVNC/vnc.html /root/noVNC/index.html
+    ## login with password Input in plaintext isNOgood
 
     
 #ENV NOVNC_SHA="b403cb92fb8de82d04f305b4f14fa978003890d7" \
