@@ -55,9 +55,11 @@ ADD docker/configs/Emulator.conf /root/.config/Android_Open_Source_Project/
 RUN mv /root/.config/Android_Open_Source_Project /root/.config/Android\ Open\ Source\ Project
 
 RUN zypper addrepo https://download.opensuse.org/repositories/network:utilities/openSUSE_Factory/network:utilities.repo
+RUN zypper addrepo https://download.opensuse.org/repositories/hardware/openSUSE_Tumbleweed/hardware.repo
 
 RUN zypper --no-gpg-checks ref  && \
     zypper in -y net-tools-deprecated \
+    scrcpy \
     xterm \
     supervisor \
     socat \
@@ -72,7 +74,7 @@ RUN zypper --no-gpg-checks ref  && \
     qemu-kvm \
     libvirt-daemon \
     libvirt-client \
-    bridge-utils 
+    bridge-utils
     
 # menu evtl. via aliens
 
