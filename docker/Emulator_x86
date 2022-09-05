@@ -97,8 +97,8 @@ RUN zypper --no-gpg-checks ref  && \
 # && apt clean all \
 # && rm -rf /var/lib/apt/lists/*
  
-RUN wget http://bdlin32.dhcp.db.de:8080/com.android.chrome_103.0.5060.129.apk
-RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_103.0.5060.129.apk
+##RUN wget http://bdlin32.dhcp.db.de:8080/com.android.chrome_103.0.5060.129.apk
+##RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_103.0.5060.129.apk
 
 #=======
 # noVNC
