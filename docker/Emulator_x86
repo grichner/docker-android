@@ -75,7 +75,7 @@ RUN zypper --no-gpg-checks ref  && \
     libvirt-daemon \
     libvirt-client \
     bridge-utils
-RUN zypper --no-gpg-checks dup
+RUN zypper --no-gpg-checks dup -y
     
 # menu evtl. via aliens
 
