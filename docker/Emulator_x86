@@ -1,4 +1,4 @@
-FROM grichner/appium-ost
+FROM grichner/appium-bionic
 ##v1.22.0-p0
 
 LABEL maintainer "Budi Utomo <budtmo.os@gmail.com>"
@@ -54,78 +54,44 @@ WORKDIR /root
 ADD docker/configs/Emulator.conf /root/.config/Android_Open_Source_Project/
 RUN mv /root/.config/Android_Open_Source_Project /root/.config/Android\ Open\ Source\ Project
 
-RUN zypper addrepo https://download.opensuse.org/repositories/network:utilities/openSUSE_Factory/network:utilities.repo
-RUN zypper addrepo https://download.opensuse.org/repositories/hardware/openSUSE_Tumbleweed/hardware.repo
-
-RUN zypper --no-gpg-checks ref  && \
-    zypper in -y net-tools-deprecated \
-    scrcpy \
+RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
     xterm \
     supervisor \
     socat \
     x11vnc \
     openbox \
-    dejavu-fonts \
     feh \
-    python310-numpy \
+    menu \
+    python3-numpy \
     net-tools \
     ffmpeg \
     jq \
     qemu-kvm \
-    libvirt-daemon \
-    libvirt-client \
-    bridge-utils
-RUN zypper --no-gpg-checks dup -y
-    
-# menu evtl. via aliens
-
-#RUN apt-get -qqy update && apt-get -qqy install --no-install-recommends \
-#    xterm \
-#    supervisor \
-#    socat \
-#    x11vnc \
-#    openbox \
-#    feh \
-#    menu \
-#    python3-numpy \
-#    net-tools \
-#    ffmpeg \
-#    jq \
-#    qemu-kvm \
-#    libvirt-daemon-system \
-#    libvirt-clients \
-#    bridge-utils \
-# && apt clean all \
-# && rm -rf /var/lib/apt/lists/*
+    libvirt-daemon-system \
+    libvirt-clients \
+    bridge-utils \
+ && apt clean all \
+ && rm -rf /var/lib/apt/lists/*
  
-##RUN wget http://bdlin32.dhcp.db.de:8080/com.android.chrome_103.0.5060.129.apk
-##RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_103.0.5060.129.apk
+RUN wget http://bdlin32.dhcp.db.de:8080/com.android.chrome_103.0.5060.129.apk
+RUN wget http://bdlin32.dhcp.db.de:8080/com.google.android.webview_103.0.5060.129.apk
 
 #=======
 # noVNC
 # Use same commit id that docker-selenium uses
 # https://github.com/elgalu/docker-selenium/blob/236b861177bd2917d864e52291114b1f5e4540d7/Dockerfile#L412-L413
 #=======
-
-RUN zypper in -y python310-websockify \
-    novnc && \
-    zypper clean --all
-RUN ln -s /usr/share/novnc /root/noVNC && \
-    cp -af /root/noVNC/vnc.html /root/noVNC/index.html
-    ## login with password Input in plaintext isNOgood
-
-    
-#ENV NOVNC_SHA="b403cb92fb8de82d04f305b4f14fa978003890d7" \
-#    WEBSOCKIFY_SHA="558a6439f14b0d85a31145541745e25c255d576b"
-#RUN  wget -nv -O noVNC.zip "https://github.com/kanaka/noVNC/archive/${NOVNC_SHA}.zip" \
-# && unzip -x noVNC.zip \
-# && rm noVNC.zip  \
-# && mv noVNC-${NOVNC_SHA} noVNC \
-# && wget -nv -O websockify.zip "https://github.com/kanaka/websockify/archive/${WEBSOCKIFY_SHA}.zip" \
-# && unzip -x websockify.zip \
-# && mv websockify-${WEBSOCKIFY_SHA} ./noVNC/utils/websockify \
-# && rm websockify.zip \
-# && ln noVNC/vnc_auto.html noVNC/index.html
+ENV NOVNC_SHA="b403cb92fb8de82d04f305b4f14fa978003890d7" \
+    WEBSOCKIFY_SHA="558a6439f14b0d85a31145541745e25c255d576b"
+RUN  wget -nv -O noVNC.zip "https://github.com/kanaka/noVNC/archive/${NOVNC_SHA}.zip" \
+ && unzip -x noVNC.zip \
+ && rm noVNC.zip  \
+ && mv noVNC-${NOVNC_SHA} noVNC \
+ && wget -nv -O websockify.zip "https://github.com/kanaka/websockify/archive/${WEBSOCKIFY_SHA}.zip" \
+ && unzip -x websockify.zip \
+ && mv websockify-${WEBSOCKIFY_SHA} ./noVNC/utils/websockify \
+ && rm websockify.zip \
+ && ln noVNC/vnc_auto.html noVNC/index.html
 
 #======================
 # Install SDK packages
@@ -166,7 +132,7 @@ RUN yes | sdkmanager --licenses && \
 #==============================================
 RUN wget -nv -O chrome.zip "https://chromedriver.storage.googleapis.com/${CHROME_DRIVER}/chromedriver_linux64.zip" \
  && unzip -x chrome.zip \
- && rm -f chrome.zip
+ && rm chrome.zip
 
 #================================================================
 # Download Google Play Services APK and Play Store from apklinker
@@ -189,7 +155,7 @@ ENV DISPLAY=:0 \
     VIDEO_PATH=/tmp/video \
     LOG_PATH=/var/log/supervisor
     
-## python3 is the new python2 forever :-)
+## python3 is the new python2 for latest ubuntu image 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 #================================================
@@ -239,6 +205,4 @@ RUN chmod -R +x /root/src && chmod +x /root/supervisord.conf
 HEALTHCHECK --interval=30s --timeout=30s --retries=3 \
     CMD adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
 
-RUN ln -s /root/emulator/emulator /usr/bin/
-RUN mkdir -p /var/log/supervisor
 CMD /usr/bin/supervisord --configuration supervisord.conf
