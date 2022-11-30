@@ -1,6 +1,6 @@
 #!/bin/bash
 
-vnc="/usr/bin/x11vnc -display ${DISPLAY} -forever -shared "
+vnc="/usr/bin/x11vnc -display ${DISPLAY} -forever -shared -nonc "
 
 pass_path="/root/vncpass"
 if [ ! -z "${VNC_PASSWORD}" ]; then
